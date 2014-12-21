@@ -35,6 +35,6 @@ The plugin generates the following elements:
 
 ----
 
-Feel free to use this plugin as you see fit wherever you feel like it'll do some good. If you run into any issues or have any suggestions for improvement please open an issue or try to fix and submit a pull request.
+Feel free to use this plugin as you see fit wherever you feel like it'll do some good. If you run into any issues or have any suggestions for improvement please open an issue or submit a pull request.
 
 
