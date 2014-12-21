@@ -15,16 +15,15 @@ function block_share($content) {
 
 	$url = get_permalink();
 
-	$twitter_via = get_option('bs_via', '');
-	$block_pattern = get_option('bs_pattern', '/(<blockquote[^>]*>)(.*?)(<\/blockquote>)/is');
+	$twitter_via = get_option('bs_via');
 
 	// text is left blank intentionally
-	$tweet_button = '<a href="https://twitter.com/intent/tweet?text=[title]&url='.$url.'&via='.$twitter_via.'"><span class="tweet"></span></a>';
-	$facebook_button = '<a href="https://www.facebook.com/sharer/sharer.php?u='.$url.'&t=[title]"><span class="like"></span></a>';
+	$tweet_button = '<a href="https://twitter.com/intent/tweet?text=[title]&url='.$url.'&via='.$twitter_via.'"><span class="icon-twitter"></span></a>';
+	$facebook_button = '<a href="https://www.facebook.com/sharer/sharer.php?u='.$url.'&t=[title]"><span class="icon-facebook"></span></a>';
 
 	// look for the pattern and append buttons
 	$content = preg_replace_callback(
-			$block_pattern, 
+			get_pattern(), 
 			function($matches) use($tweet_button, $facebook_button) {
                         	return $matches[1] . $matches[2] .
 					'<span class="blockshare">' .
@@ -36,6 +35,20 @@ function block_share($content) {
 			$content);
 
 	return $content;
+}
+
+function get_pattern() {
+        $opener = str_replace('/', '\/', get_option('bs_opener'));
+        $closer = str_replace('/', '\/', get_option('bs_closer'));
+
+	if(is_null_or_empty($opener) || is_null_or_empty($closer)) return '/(<blockquote[^>]*>)(.*?)(<\/blockquote>)/is';
+
+	$pattern = '/('.$opener.')(.*?)('.$closer.')/is';
+	return $pattern;
+}
+
+function is_null_or_empty($str) {
+	return (!isset($str) || trim($str)==='');
 }
 
 function blockshare_menu() {
@@ -52,15 +65,20 @@ function build_options() {
 
 function admin_init_blockshare() {
 	register_setting('blockshare', 'bs_via');
-	register_setting('blockshare', 'bs_pattern');
+	register_setting('blockshare', 'bs_opener');
+	register_setting('blockshare', 'bs_closer');
 	register_setting('blockshare', 'bs_twitter');
 	register_setting('blockshare', 'bs_facebook');
+	register_setting('blockshare', 'bs_custom_css');
 }
 
 // this functions adds the stylesheet to the head
 function block_share_styles() {
-	//wp_register_style('doctypes_styles', plugins_url('kk-social-share-starter.css', __FILE__));
-	//wp_enqueue_style('doctypes_styles');
+	$custom_css = get_option('bs_custom_css');
+	if($custom_css) return;
+
+	wp_register_style('doctypes_styles', plugins_url('blockshare.css', __FILE__));
+	wp_enqueue_style('doctypes_styles');
 }
 
 // HOOKS =============
@@ -71,4 +89,4 @@ if ( is_admin() ){
 }
 
 add_filter('the_content', 'block_share');
-//add_action('wp_enqueue_scripts', 'block_share_styles');
+add_action('wp_enqueue_scripts', 'block_share_styles');
