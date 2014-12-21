@@ -1,4 +1,4 @@
-# WP-BlockShare
+# WP BlockShare
 
 A simple Wordpress plugin that adds tweet and like buttons to `<blockquote>` elements with the content as the tweet/like message.
 
@@ -32,5 +32,9 @@ The plugin generates the following elements:
   <a href="..."><span class="icon-twitter"></span></a>
 </span>
 ```
+
+----
+
+Feel free to use this plugin as you see fit wherever you feel like it'll do some good. If you run into any issues or have any suggestions for improvement please open an issue or try to fix and submit a pull request.
 
 
