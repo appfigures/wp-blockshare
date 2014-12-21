@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: BlockShare
-Plugin URI: http://arielmichaeli.com/plugins/blockshare
+Plugin URI: https://github.com/appfigures/wp-blockshare/
 Description: Adds tweet/like buttons to blockquotes
 Author: Ariel M./appFigures 2014
 Author URI: http://arielmichaeli.com/
