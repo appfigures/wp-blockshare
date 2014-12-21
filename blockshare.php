@@ -1,12 +1,12 @@
 <?php
 /*
-Plugin Name: Block Share
-Plugin URI: http://newinternetorder.com/giveaway-heres-why-social-share-counters-suck-plus-what-i-can-give-you-that-doesnt/
-Description: Adds tweet button to blockquotes
-Author: Ariel M
+Plugin Name: BlockShare
+Plugin URI: http://arielmichaeli.com/plugins/blockshare
+Description: Adds tweet/like buttons to blockquotes
+Author: Ariel M./appFigures 2014
 Author URI: http://arielmichaeli.com/
-Version: 1
-License: GPL2
+Version: 1.0
+License: MIT
 */
 
 function block_share($content) {
